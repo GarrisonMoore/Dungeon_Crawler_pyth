@@ -40,6 +40,21 @@ class Player(Character):
         # start player xp at 0
         self.xp = 0
 
+    def move(self,current_node):
+
+        while True:
+            player_action = input("Where to? ")
+
+            # if the action is a valid door, move to the next room
+            if player_action in current_node.paths and current_node.paths[player_action] is not None:
+                current_node = current_node.paths[player_action]
+                break
+            else:
+                print("You can't go that way!")
+                continue
+
+        return  current_node
+
     def gain_xp(self, amount):
         """Method to add xp to the player and level up if necessary"""
         self.xp += amount

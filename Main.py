@@ -36,6 +36,7 @@ while True:
 
     # generate the dungeon and call visualize_map to display it
     start_node = dungeon.generate_dungeon(current_level)
+
     print(f"\n DUNGEON LEVEL {colors.GREEN}{current_level}{colors.RESET}.")
     print("\n========== DEBUG: DUNGEON MAP ==========")
     dungeon.visualize_map(start_node)
@@ -61,15 +62,10 @@ while True:
 
         # join the list into a single readable string
         print(f"Doors: [{', '.join(door_display)}]")
-        # get user input for traversal action
-        action = input("Where to? ")
 
-        # if the action is a valid door, move to the next room
-        if action in current_node.paths and current_node.paths[action] is not None:
-            current_node = current_node.paths[action]
-        else:
-            print("You can't go that way!")
-            continue
+        # get user input for traversal action (use playercharacter move method)
+        # assign current node to the players choice (this is how we traverse the map)
+        current_node = PC.move(current_node)
 
         # check if room is an exit, break loop if it is / increment level and reward player xp
         if current_node.is_exit:
