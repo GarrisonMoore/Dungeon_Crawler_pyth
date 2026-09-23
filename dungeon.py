@@ -1,9 +1,7 @@
 from random import choice
 from random import randint
-import Characters
 import colors
 from Characters import call_mob, Player
-from combat import run_turn
 
 # A pool of room names
 room_list = ["Sewer", "Grotto", "Cave", "Sludge pit", "Bonfire", "Corridor","Crypt",

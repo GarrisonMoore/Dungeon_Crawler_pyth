@@ -1,4 +1,21 @@
-import Narrator
+"""Edited 9/22/2026 - Garrison Moore
+
+DUNGEON CRAWLER !
+
+This program will procedurally generate a maze-like dungeon for the player to traverse.
+Map is created using a 'tree' data structure:
+    * Tree 'trunk' - The direct path from the entrance to exit.
+    * Tree 'branches' - Decoy rooms attached to the trunk, lead to dead ends.
+
+Combat uses a 3 input per turn, stamina bound system. Creates a heavy survival like combat system with consequences.
+    * Options:
+        * 'a' = Attack (deal heavy damage, costs SP)
+        * 'd' = Defend (build hyper-armour for 1 turn, costs SP)
+        * 'r' = Recharge SP (Recharge stamina points)
+        * 'h' = Heal (recharge health, costs SP)"""
+
+
+import game
 import colors
 
 # intro
@@ -6,7 +23,7 @@ print(f"\n{colors.CYAN}========================================{colors.RESET}")
 print(f"{colors.GREEN}       TERMINAL DUNGEON CRAWLER         {colors.RESET}")
 print(f"{colors.CYAN}========================================{colors.RESET}")
 
-Narrator = Narrator.Game()
+Narrator = game.Game()
 
 # instructions
 print(f"\nWelcome to the dungeon, {colors.CYAN}{Narrator.PC.name}{colors.RESET}.")

@@ -41,10 +41,9 @@ class Player(Character):
         self.xp = 0
 
     def move(self,current_node):
-
+        """Method to take user input and turn it into player traversal action"""
         while True:
             player_action = input("Where to? ")
-
             # if the action is a valid door, move to the next room
             if player_action in current_node.paths and current_node.paths[player_action] is not None:
                 current_node = current_node.paths[player_action]
@@ -52,7 +51,6 @@ class Player(Character):
             else:
                 print("You can't go that way!")
                 continue
-
         return  current_node
 
     def gain_xp(self, amount):

@@ -1,6 +1,4 @@
 from random import randint
-from random import choice
-import Characters
 import colors
 
 inputs = ["a", "d", "r", "h"]
