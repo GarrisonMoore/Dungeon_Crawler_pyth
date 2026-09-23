@@ -3,31 +3,36 @@ import colors
 import combat
 import dungeon
 
-
 class Game:
+    """Game class represents the orchestrator of the game (God basically)"""
     def __init__(self):
         self.name = " "
         self.dungeon_level = 1
         self.PC = Characters.Player(50,50,0)
-        self.current_node = self.current_node
+        self.current_node = None
 
     def check_bonfire(self):
+        """Check if current room is a bonfire, heal and charge if so"""
         # if current room is a bonfire, rest safely and heal HP and SP
         if self.current_node.is_bonfire:
             print(f"\n{colors.GREEN}You rest safely. HP and SP fully restored.{colors.RESET}")
             self.PC.hp = self.PC.max_hp
             self.PC.sp = self.PC.max_sp
 
-    def check_exit(self,current_node,current_level):
+    def check_exit(self):
+        """Check if current room is an exit room, return True to break loop in main if so"""
         # check if room is an exit, break loop if it is / increment level and reward player xp
-        if current_node.is_exit:
+        if self.current_node.is_exit:
             print("\nYou have reached the exit!\n")
-            current_level += 1
+            self.dungeon_level += 1
             # reward the player xp for completing the level
-            reward_xp = 50 * current_level
+            reward_xp = 50 * self.dungeon_level
             self.PC.gain_xp(reward_xp)
+            return True
+        return False
 
     def check_mob(self):
+        """Check if the current room has a mob, run combat if so"""
         # if current room has a mob, spawn it and run combat
         if self.current_node.mob:
             print(f"\nA {colors.YELLOW}{self.current_node.mob.name}{colors.RESET} has appeared!")
@@ -63,6 +68,7 @@ class Game:
 
 
     def run(self):
+        """Method to run the main game, uses methods above"""
 
         # Main game loop
         while True:
@@ -106,7 +112,9 @@ class Game:
                 self.current_node = self.PC.move(self.current_node)
 
                 # check if the room is an exit
-                self.check_exit(self.current_node, self.dungeon_level)
+                if self.check_exit():
+                    # break loop if it is
+                    break
                 # Check if the room is a bonfire
                 self.check_bonfire()
                 # if current room has a mob, spawn it and run combat
