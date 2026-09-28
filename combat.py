@@ -70,42 +70,49 @@ def resolve_turn(name, inputs, is_player, current_sp,player_level):
         # if player is attacking, scale damage based on level
         if is_player:
             base_min = 2 + int(player_level * 1.5)
-            base_max = 5 + (player_level * 3)
+            base_max = 5 + player_level * 2
         else:
             # scale npc damage at a lower rate
-            base_min = 2 + player_level
-            base_max = 5 + (player_level * 2)
+            base_min = 2 + int(player_level * 1.5)
+            base_max = 5 + player_level * 2
 
-        # determines what action to take based on input
+        # This giant if / else block determines what action to take based on input
+        # attack action
         if action == "a":
-            # attack cost 5 sp
-            if active_sp >= 5:
-                dmg_random = randint(base_min,base_max)
+            # attack cost 1 action and sp equivalent to damage dealt
+            dmg_random = randint(base_min,base_max)
+            if active_sp >= dmg_random:
                 dmg_out += dmg_random
-                sp_change -= 5
+                sp_change -= dmg_random
                 print(f"{name} dealt {colors.RED}{dmg_random}{colors.RESET} damage!")
             else:
                 print(f"{name} is too exhausted to attack!")
 
+        # defend action
         elif action == "d":
-            if active_sp >= 3:
-                dmg_reduction = randint(base_min,base_max) // 2
+            # costs 1 action and sp equivalent to damage reduction
+            dmg_reduction = randint(base_min,base_max) // 2
+            if active_sp >= dmg_reduction:
                 dmg_in += dmg_reduction
-                sp_change -= 3
+                sp_change -= dmg_reduction
                 print(f"{name} reduced incoming damage by {colors.BLUE}{dmg_reduction}{colors.RESET}!")
             else:
                 print(f"{name} is too exhausted to defend!")
 
+        # recharge SP action
         elif action == "r":
+            # costs 1 action
             sp_random = randint(base_min,base_max)
             sp_change += sp_random
             print(f"{name} recharged SP by {colors.GREEN}{sp_random}{colors.RESET}!")
 
+        # heal action
         elif action == "h":
-            if active_sp >= 10:
-                hp_random = randint(base_min,base_max)
+            # heal costs SP equivalent to hp_random
+            hp_random = randint(base_min, base_max)
+            if active_sp >= hp_random:
                 hp_change += hp_random
-                sp_change -= 10
+                sp_change -= hp_random
                 print(f"{name} healed for {colors.RED}{hp_random}{colors.RESET} HP!")
             else:
                 print(f"{name} is too exhausted to heal!")

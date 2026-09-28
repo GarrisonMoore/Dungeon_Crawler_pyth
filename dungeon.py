@@ -1,13 +1,13 @@
 from random import choice
 from random import randint
 import colors
-from Characters import call_mob, Player
+from Main.Characters import call_mob
 
 # A pool of room names
 room_list = ["Sewer", "Grotto", "Cave", "Sludge pit", "Bonfire", "Corridor","Crypt",
              "Abyss","Tomb","Catacomb","Gutter"]
 
-class Room():
+class Room:
     """A room is a node in the map"""
     def __init__(self,name, current_level):
         self.name = name
