@@ -39,7 +39,8 @@ class Player(Character):
         # start player xp at 0
         self.xp = 0
 
-    def move(self,current_node):
+    @staticmethod
+    def move(current_node):
         """Method to take user input and turn it into player traversal action"""
         while True:
             player_action = input("Where to? ")
@@ -82,16 +83,17 @@ class Mob(Character):
 
         super().__init__(name,hp,sp)
 
-def call_mob(current_level):
-    """Randomly selects a mob from the mob_list dictionary and scales its stats based on the current level."""
-    mob_name = choice(list(mob_list.keys()))
+    @staticmethod
+    def call_mob(current_level):
+        """Randomly selects a mob from the mob_list dictionary and scales its stats based on the current level."""
+        mob_name = choice(list(mob_list.keys()))
 
-    # get mob stats from the mob_list dictionary
-    stats = mob_list[mob_name]
+        # get mob stats from the mob_list dictionary
+        stats = mob_list[mob_name]
 
-    # scale the mob's stats based on the current level
-    scaled_hp = stats["hp"] * (current_level)
-    scaled_sp = stats["sp"] * (current_level)
+        # scale the mob's stats based on the current level
+        scaled_hp = stats["hp"] * (current_level)
+        scaled_sp = stats["sp"] * (current_level)
 
-    # return a Mob object with the scaled stats
-    return Mob(name = mob_name, hp = scaled_hp, sp = scaled_sp)
+        # return a Mob object with the scaled stats
+        return Mob(name = mob_name, hp = scaled_hp, sp = scaled_sp)
