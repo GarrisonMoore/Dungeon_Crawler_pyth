@@ -16,7 +16,7 @@ Combat uses a 3 input per turn, stamina bound system. Creates a heavy survival-l
         * 'h' = Heal (recharge health, costs SP)"""
 
 
-import Orchestrator
+from orchestrator import Game
 import colors
 
 # intro
@@ -24,7 +24,7 @@ print(f"\n{colors.CYAN}========================================{colors.RESET}")
 print(f"{colors.GREEN}       TERMINAL DUNGEON CRAWLER         {colors.RESET}")
 print(f"{colors.CYAN}========================================{colors.RESET}")
 
-Narrator = Orchestrator.Game()
+Narrator = Game()
 
 # instructions
 print(f"\nWelcome to the dungeon, {colors.CYAN}{Narrator.PC.name}{colors.RESET}.")
