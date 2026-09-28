@@ -1,0 +1,48 @@
+@startuml classes
+set namespaceSeparator none
+class "Character" as Dungeon_Crawler.Characters.Character {
+  hp
+  hyperarmour : int
+  name
+  sp
+}
+class "Game" as Dungeon_Crawler.orchestrator.Game {
+  PC
+  current_node : NoneType
+  dungeon_level : int
+  name : str
+  check_bonfire()
+  check_exit()
+  check_mob()
+  run()
+}
+class "Mob" as Dungeon_Crawler.Characters.Mob {
+  hp
+  max_hp
+  max_sp
+  name
+  sp
+}
+class "Player" as Dungeon_Crawler.Characters.Player {
+  hp
+  is_Player : bool
+  level : int
+  max_hp
+  max_sp
+  sp
+  xp : int
+  xp_to_next_level : int
+  gain_xp(amount)
+  move(current_node)
+}
+class "Room" as Dungeon_Crawler.dungeon.Room {
+  is_bonfire
+  is_exit : bool
+  is_trunk : bool
+  mob : NoneType
+  name : str
+  paths : dict
+}
+Dungeon_Crawler.Characters.Mob --|> Dungeon_Crawler.Characters.Character
+Dungeon_Crawler.Characters.Player --|> Dungeon_Crawler.Characters.Character
+@enduml
