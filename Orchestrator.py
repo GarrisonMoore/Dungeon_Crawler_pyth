@@ -4,7 +4,7 @@ import Dungeon
 import Colors
 
 
-class Game:
+class Orchestrator:
     """Game class represents the orchestrator of the game (God basically)"""
     def __init__(self):
         self.name = " "
