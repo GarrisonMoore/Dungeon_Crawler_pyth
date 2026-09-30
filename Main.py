@@ -16,27 +16,27 @@ Combat uses a 3 input per turn, stamina bound system. Creates a heavy survival-l
         * 'h' = Heal (recharge health, costs SP)"""
 
 
-from orchestrator import Game
-import colors
+from Orchestrator import Game
+import Colors
 
 # intro
-print(f"\n{colors.CYAN}========================================{colors.RESET}")
-print(f"{colors.GREEN}       TERMINAL DUNGEON CRAWLER         {colors.RESET}")
-print(f"{colors.CYAN}========================================{colors.RESET}")
+print(f"\n{Colors.CYAN}========================================{Colors.RESET}")
+print(f"{Colors.GREEN}       TERMINAL DUNGEON CRAWLER         {Colors.RESET}")
+print(f"{Colors.CYAN}========================================{Colors.RESET}")
 
 Narrator = Game()
 
 # instructions
-print(f"\nWelcome to the dungeon, {colors.CYAN}{Narrator.PC.name}{colors.RESET}.")
-print(f"\n{colors.YELLOW}HOW TO PLAY:{colors.RESET}")
-print(f" * Navigate the maze using directional string commands ({colors.GREEN}left, right, straight, back{colors.RESET}).")
-print(f" * Combat uses a {colors.CYAN}3-action combo system{colors.RESET} per turn (Max 3 inputs).")
-print(f" * [{colors.RED}a{colors.RESET}] Attack  - Deals heavy damage (Costs SP)")
-print(f" * [{colors.BLUE}d{colors.RESET}] Defend  - Builds hyperarmour shield (Costs SP)")
-print(f" * [{colors.GREEN}r{colors.RESET}] Recharge- Restores stamina / SP")
-print(f" * [{colors.RED}h{colors.RESET}] Heal    - Recovers HP (Costs SP)")
-print(f"\n{colors.YELLOW}WARNING:{colors.RESET} Running out of SP leaves you exhausted and unable to act!")
-print(f"Find {colors.GREEN}Bonfires{colors.RESET} to fully restore your stats and survive the descent.")
-input(f"\nPress {colors.GREEN}Enter{colors.RESET} to enter the dungeon...")
+print(f"\nWelcome to the dungeon, {Colors.CYAN}{Narrator.PC.name}{Colors.RESET}.")
+print(f"\n{Colors.YELLOW}HOW TO PLAY:{Colors.RESET}")
+print(f" * Navigate the maze using directional string commands ({Colors.GREEN}left, right, straight, back{Colors.RESET}).")
+print(f" * Combat uses a {Colors.CYAN}3-action combo system{Colors.RESET} per turn (Max 3 inputs).")
+print(f" * [{Colors.RED}a{Colors.RESET}] Attack   - Deals heavy damage (Costs SP)")
+print(f" * [{Colors.BLUE}d{Colors.RESET}] Defend   - Builds hyperarmour shield (Costs SP)")
+print(f" * [{Colors.GREEN}r{Colors.RESET}] Recharge - Restores stamina / SP")
+print(f" * [{Colors.RED}h{Colors.RESET}] Heal     - Recovers HP (Costs SP)")
+print(f"\n{Colors.YELLOW}WARNING:{Colors.RESET} Running out of SP leaves you exhausted and unable to act!")
+print(f"Find {Colors.GREEN}Bonfires{Colors.RESET} to fully restore your stats and survive the descent.")
+input(f"\nPress {Colors.GREEN}Enter{Colors.RESET} to enter the dungeon...")
 
 Narrator.run()

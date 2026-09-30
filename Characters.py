@@ -1,5 +1,6 @@
+from argparse import BooleanOptionalAction
 from random import choice
-import colors
+import Colors
 
 # Using a dictionary to store different characters and their stats
 mob_list = {
@@ -46,24 +47,26 @@ class Player(Character):
         # start player xp at 0
         self.xp = 0
 
-    @staticmethod
-    def move(current_node):
+
+    def move(self, current_node):
         """Method to take user input and turn it into player traversal action"""
         while True:
             player_action = input("Where to? ")
             # if the action is a valid door, move to the next room
             if player_action in current_node.paths and current_node.paths[player_action] is not None:
                 current_node = current_node.paths[player_action]
+                print(f"\n{Colors.CYAN}{self.name}{Colors.RESET} enters the {Colors.MAGENTA}{current_node}{Colors.RESET}.")
                 break
             else:
                 print(f"\n{choice(blocked_strings)}\n")
                 continue
+
         return  current_node
 
     def gain_xp(self, amount):
         """Method to add xp to the player and level up if necessary"""
         self.xp += amount
-        print(f"{colors.CYAN}{self.name}{colors.RESET} gained {colors.GREEN}+{amount}{colors.RESET} XP!")
+        print(f"{Colors.CYAN}{self.name}{Colors.RESET} gained {Colors.GREEN}+{amount}{Colors.RESET} XP!")
 
         # check if player has reached the next level
         while self.xp >= self.xp_to_next_level:
@@ -76,8 +79,8 @@ class Player(Character):
             self.hp = self.max_hp
             self.sp = self.max_sp
 
-            print(f"{colors.CYAN}{self.name}{colors.RESET} leveled up to level {colors.GREEN}{self.level}{colors.RESET}!")
-            print(f"Max HP and SP increased by {colors.GREEN}20{colors.RESET}!")
+            print(f"{Colors.CYAN}{self.name}{Colors.RESET} leveled up to level {Colors.GREEN}{self.level}{Colors.RESET}!")
+            print(f"Max HP and SP increased by {Colors.GREEN}20{Colors.RESET}!")
 
 class Mob(Character):
     """Mob class to initialize mob data"""
