@@ -9,6 +9,7 @@ mob_list = {
     "Troll": {"hp":40, "sp":40}
 }
 
+# list to store variation of blocked door phrases
 blocked_strings = ["You can't go that way!",
                    "You walk into a wall. Try again.",
                    "An unknown force keeps you from entering.",
@@ -46,7 +47,6 @@ class Player(Character):
 
         # start player xp at 0
         self.xp = 0
-
 
     def move(self, current_node):
         """Method to take user input and turn it into player traversal action"""
@@ -92,7 +92,6 @@ class Mob(Character):
         self.max_sp = sp
 
         super().__init__(name,hp,sp)
-
 
 def call_mob(current_level):
     """Randomly selects a mob from the mob_list dictionary and scales its stats based on the current level."""
