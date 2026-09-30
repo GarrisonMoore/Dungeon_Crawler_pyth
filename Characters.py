@@ -8,6 +8,8 @@ mob_list = {
     "Troll": {"hp":40, "sp":40}
 }
 
+blocked_strings = [1,2,3]
+
 class Character:
     """Universal Character class to initialize character data"""
     def __init__(self,name,hp,sp):
@@ -42,6 +44,8 @@ class Player(Character):
     @staticmethod
     def move(current_node):
         """Method to take user input and turn it into player traversal action"""
+
+
         while True:
             player_action = input("Where to? ")
             # if the action is a valid door, move to the next room

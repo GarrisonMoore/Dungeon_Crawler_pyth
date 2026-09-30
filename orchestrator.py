@@ -12,6 +12,8 @@ class Game:
         self.PC = Characters.Player(50, 50, 0)
         self.current_node = None
 
+        self.combat_manager = combat.CombatManager()
+
     def check_bonfire(self):
         """Check if current room is a bonfire, heal and charge if so"""
         # if current room is a bonfire, rest safely and heal HP and SP
@@ -40,7 +42,7 @@ class Game:
             while self.current_node.mob.hp > 0:
 
                 # Player combat turn
-                combat.run_turn(self.PC, self.current_node.mob, True)
+                self.combat_manager.run_turn(self.PC, self.current_node.mob, True)
                 if self.current_node.mob.hp <= 0:
                     self.current_node.mob.hp = 0
 
@@ -62,7 +64,7 @@ class Game:
                     break
 
                 # NPC combat turn
-                combat.run_turn(self.PC, self.current_node.mob, False)
+                self.combat_manager.run_turn(self.PC, self.current_node.mob, False)
                 if self.PC.hp <= 0:
                     self.PC.hp = 0
                     break
