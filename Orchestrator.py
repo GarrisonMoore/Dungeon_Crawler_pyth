@@ -1,7 +1,7 @@
 import Characters
 import CombatManager
 import Dungeon
-import Colors
+import Tools
 
 
 class Orchestrator:
@@ -18,7 +18,7 @@ class Orchestrator:
         """Check if current room is a bonfire, heal and charge if so"""
         # if current room is a bonfire, rest safely and heal HP and SP
         if self.current_node.is_bonfire:
-            print(f"\n{Colors.GREEN}You rest safely. HP and SP fully restored.{Colors.RESET}")
+            print(f"\n{Tools.GREEN}You rest safely. HP and SP fully restored.{Tools.RESET}")
             self.PC.hp = self.PC.max_hp
             self.PC.sp = self.PC.max_sp
 
@@ -38,7 +38,7 @@ class Orchestrator:
         """Check if the current room has a mob, run combat if so"""
         # if current room has a mob, spawn it and run combat
         if self.current_node.mob:
-            print(f"\nA {Colors.YELLOW}{self.current_node.mob.name}{Colors.RESET} has appeared!")
+            print(f"\nA {Tools.YELLOW}{self.current_node.mob.name}{Tools.RESET} has appeared!")
             while self.current_node.mob.hp > 0:
 
                 # Player combat turn
@@ -53,9 +53,10 @@ class Orchestrator:
                     self.PC.hp = min(self.PC.hp + reward_hp_sp, self.PC.max_hp)
                     self.PC.sp = min(self.PC.sp + reward_hp_sp, self.PC.max_sp)
 
-                    print(f"\nYou killed the {Colors.YELLOW}{self.current_node.mob.name}{Colors.RESET}!")
+                    Tools.clear_terminal()
+                    print(f"\nYou killed the {Tools.YELLOW}{self.current_node.mob.name}{Tools.RESET}!")
                     print(
-                        f"{Colors.CYAN}{self.PC.name}{Colors.RESET} gained {Colors.GREEN}+{reward_hp_sp}{Colors.RESET} HP & SP")
+                        f"{Tools.CYAN}{self.PC.name}{Tools.RESET} gained {Tools.GREEN}+{reward_hp_sp}{Tools.RESET} HP & SP")
                     # call the gain_xp method to update the player's xp with the reward'
                     self.PC.gain_xp(reward_xp)
 
@@ -77,14 +78,15 @@ class Orchestrator:
         while True:
             # check if player character is alive before doing anything
             if self.PC.hp <= 0:
+                Tools.clear_terminal()
                 print(
-                    f"{Colors.CYAN}{self.PC.name}{Colors.RESET} has been slain by the {Colors.YELLOW}{self.current_node.mob.name}{Colors.RESET}!")
+                    f"{Tools.CYAN}{self.PC.name}{Tools.RESET} has been slain by the {Tools.YELLOW}{self.current_node.mob.name}{Tools.RESET}!")
                 break
 
             # generate the dungeon and call visualize_map to display it
             start_node = Dungeon.generate_dungeon(self.dungeon_level)
 
-            print(f"\n DUNGEON LEVEL {Colors.GREEN}{self.dungeon_level}{Colors.RESET}.")
+            print(f"\n DUNGEON LEVEL {Tools.GREEN}{self.dungeon_level}{Tools.RESET}.")
             print("\n========== DEBUG: DUNGEON MAP ==========")
             Dungeon.visualize_map(start_node)
             print("========================================\n")
@@ -95,17 +97,17 @@ class Orchestrator:
             # game logic loop
             while self.PC.hp > 0:
                 # print the current room's name and doors'
-                print(f"\n--- {Colors.MAGENTA}{self.current_node.name}{Colors.RESET} ---")
+                print(f"\n--- {Tools.MAGENTA}{self.current_node.name}{Tools.RESET} ---")
 
                 # Build a list of colored strings for the doors (Gemini helped me with this)
                 door_display = []
                 for direction, destination in self.current_node.paths.items():
                     if destination is not None:
                         # Open path
-                        door_display.append(f"{Colors.GREEN}{direction}{Colors.RESET}")
+                        door_display.append(f"{Tools.GREEN}{direction}{Tools.RESET}")
                     else:
                         # Dead end
-                        door_display.append(f"{Colors.RED}{direction} (blocked){Colors.RESET}")
+                        door_display.append(f"{Tools.RED}{direction} (blocked){Tools.RESET}")
 
                 # join the list into a single readable string
                 print(f"Doors: [{', '.join(door_display)}]")

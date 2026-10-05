@@ -1,6 +1,6 @@
 from random import choice
 from random import randint
-import Colors
+import Tools
 from Characters import call_mob
 
 # A pool of room names
@@ -113,7 +113,7 @@ def visualize_map(room, indent=""):
     * GEMINI WROTE THIS METHOD. I needed something to help visualize the data structure."""
 
     # if the room is on the main path, wrap its name in the green color code
-    display_name = f"{Colors.GREEN}{room.name}{Colors.RESET}" if room.is_trunk else room.name
+    display_name = f"{Tools.GREEN}{room.name}{Tools.RESET}" if room.is_trunk else room.name
 
     # print the rooms mob or safe status
     mob_status = f"[Enemy: {room.mob.name}]" if room.mob else "[Safe]"

@@ -1,7 +1,13 @@
 from random import randint
-import Colors
+from random import choice
+import Tools
 
 inputs = ["a", "d", "r", "h"]
+
+attack_var = ["punches", "kicks", "drop kicks", "body slams", "guillotines",
+             "suplexes", "chokeslams", "powerbombs", "karate chops", "tickles", "bad breath hits"]
+
+block_var = ["blocks", "deflects", "parries", "dodges", "evades", "brushes off", "absorbs"]
 
 class CombatManager:
 
@@ -9,8 +15,8 @@ class CombatManager:
     def show_stats(player,enemy):
         """Displays current combat stats for both entities"""
         print(f"\n---- STATS ----")
-        print(f"{Colors.YELLOW}{enemy.name}{Colors.RESET} -> HP: {Colors.RED}{enemy.hp}{Colors.RESET} | SP: {Colors.GREEN}{enemy.sp}{Colors.RESET}")
-        print(f"{Colors.CYAN}{player.name}{Colors.RESET} -> HP: {Colors.RED}{player.hp}{Colors.RESET} | SP: {Colors.GREEN}{player.sp}{Colors.RESET}")
+        print(f"{Tools.YELLOW}{enemy.name}{Tools.RESET} -> HP: {Tools.RED}{enemy.hp}{Tools.RESET} | SP: {Tools.GREEN}{enemy.sp}{Tools.RESET}")
+        print(f"{Tools.CYAN}{player.name}{Tools.RESET} -> HP: {Tools.RED}{player.hp}{Tools.RESET} | SP: {Tools.GREEN}{player.sp}{Tools.RESET}")
         print(f"---------------------")
 
     @staticmethod
@@ -76,9 +82,9 @@ class CombatManager:
 
         # assign color to name based on who's turn it is
         if is_player:
-            name = Colors.CYAN + name + Colors.RESET
+            name = Tools.CYAN + name + Tools.RESET
         else:
-            name = Colors.YELLOW + name + Colors.RESET
+            name = Tools.YELLOW + name + Tools.RESET
 
 
 
@@ -106,7 +112,7 @@ class CombatManager:
                 if active_sp >= dmg_random:
                     dmg_out += dmg_random
                     sp_change -= dmg_random
-                    print(f"{name} dealt {Colors.RED}{dmg_random}{Colors.RESET} damage! (-{dmg_random} SP)")
+                    print(f"{name} {choice(attack_var)} for {Tools.RED}{dmg_random}{Tools.RESET} damage! (-{dmg_random} SP)")
                 else:
                     print(f"{name} is too exhausted to attack!")
 
@@ -118,7 +124,7 @@ class CombatManager:
                 if active_sp >= dmg_reduction:
                     dmg_in += dmg_reduction
                     sp_change -= dmg_reduction
-                    print(f"{name} reduced incoming damage by {Colors.BLUE}{dmg_reduction}{Colors.RESET}! (-{dmg_reduction} SP)")
+                    print(f"{name} {choice(block_var)} {Tools.BLUE}{dmg_reduction}{Tools.RESET} damage! (-{dmg_reduction} SP)")
                 else:
                     print(f"{name} is too exhausted to defend!")
 
@@ -127,7 +133,7 @@ class CombatManager:
                 # costs 1 action, free otherwise.
                 sp_random = randint(base_min,base_max)
                 sp_change += sp_random
-                print(f"{name} recharged SP by {Colors.GREEN}{sp_random}{Colors.RESET}! (+{sp_random} SP)")
+                print(f"{name} recharged {Tools.GREEN}{sp_random}{Tools.RESET} SP! (+{sp_random} SP)")
 
             # heal action
             elif action == "h":
@@ -137,7 +143,7 @@ class CombatManager:
                 if active_sp >= hp_random*2:
                     hp_change += hp_random
                     sp_change -= hp_random*2
-                    print(f"{name} healed for {Colors.RED}{hp_random}{Colors.RESET} HP! (-{hp_random*2} SP)")
+                    print(f"{name} healed for {Tools.RED}{hp_random}{Tools.RESET} HP! (-{hp_random * 2} SP)")
                 else:
                     print(f"{name} is too exhausted to heal!")
             else:

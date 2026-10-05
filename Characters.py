@@ -1,6 +1,6 @@
 from argparse import BooleanOptionalAction
 from random import choice
-import Colors
+import Tools
 
 # Using a dictionary to store different characters and their stats
 mob_list = {
@@ -55,7 +55,7 @@ class Player(Character):
             # if the action is a valid door, move to the next room
             if player_action in current_node.paths and current_node.paths[player_action] is not None:
                 current_node = current_node.paths[player_action]
-                print(f"\n{Colors.CYAN}{self.name}{Colors.RESET} enters the {Colors.MAGENTA}{current_node}{Colors.RESET}.")
+                print(f"\n{Tools.CYAN}{self.name}{Tools.RESET} enters the {Tools.MAGENTA}{current_node}{Tools.RESET}.")
                 break
             else:
                 print(f"\n{choice(blocked_strings)}\n")
@@ -66,7 +66,7 @@ class Player(Character):
     def gain_xp(self, amount):
         """Method to add xp to the player and level up if necessary"""
         self.xp += amount
-        print(f"{Colors.CYAN}{self.name}{Colors.RESET} gained {Colors.GREEN}+{amount}{Colors.RESET} XP!")
+        print(f"{Tools.CYAN}{self.name}{Tools.RESET} gained {Tools.GREEN}+{amount}{Tools.RESET} XP!")
 
         # check if player has reached the next level
         while self.xp >= self.xp_to_next_level:
@@ -79,8 +79,8 @@ class Player(Character):
             self.hp = self.max_hp
             self.sp = self.max_sp
 
-            print(f"{Colors.CYAN}{self.name}{Colors.RESET} leveled up to level {Colors.GREEN}{self.level}{Colors.RESET}!")
-            print(f"Max HP and SP increased by {Colors.GREEN}20{Colors.RESET}!")
+            print(f"{Tools.CYAN}{self.name}{Tools.RESET} leveled up to level {Tools.GREEN}{self.level}{Tools.RESET}!")
+            print(f"Max HP and SP increased by {Tools.GREEN}20{Tools.RESET}!")
 
 class Mob(Character):
     """Mob class to initialize mob data"""
