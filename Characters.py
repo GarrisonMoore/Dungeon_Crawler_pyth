@@ -32,16 +32,28 @@ class Character:
         return f"{self.name, self.hp, self.sp}"
 
     def take_damage(self, incoming_dmg):
+        """
+        Method for a character to receive damage
+        """
         actual_damage = max(0, incoming_dmg - self.hyperarmour)
         self.hp = max(0, self.hp - actual_damage)
 
     def update_HP(self, amount):
+        """
+        Method to update a character objects HP.
+        """
         self.hp = min(self.hp + amount, self.max_hp)
 
     def update_SP(self, amount):
+        """
+        Method to update a character objects SP.
+        """
         self.sp = min(self.sp + amount, self.max_sp)
 
     def full_restore(self):
+        """
+        Method to fully restore a character objects HP & SP.
+        """
         self.hp = self.max_hp
         self.sp = self.max_sp
 
