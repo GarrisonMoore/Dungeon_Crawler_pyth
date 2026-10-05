@@ -15,7 +15,6 @@ Combat uses a 3 input per turn, stamina bound system. Creates a heavy survival-l
         * 'r' = Recharge SP (Recharge stamina points)
         * 'h' = Heal (recharge health, costs SP)"""
 
-
 from Orchestrator import Orchestrator
 import Tools
 

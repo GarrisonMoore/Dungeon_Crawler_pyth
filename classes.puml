@@ -50,6 +50,7 @@ class "Room" as Dungeon_Crawler.dungeon.Room {
   name : str
   paths : dict
 }
+
 Dungeon_Crawler.Characters.Mob --|> Dungeon_Crawler.Characters.Character
 Dungeon_Crawler.Characters.Player --|> Dungeon_Crawler.Characters.Character
 

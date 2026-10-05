@@ -19,8 +19,7 @@ class Orchestrator:
         # if current room is a bonfire, rest safely and heal HP and SP
         if self.current_node.is_bonfire:
             print(f"\n{Tools.GREEN}You rest safely. HP and SP fully restored.{Tools.RESET}")
-            self.PC.hp = self.PC.max_hp
-            self.PC.sp = self.PC.max_sp
+            self.PC.full_restore()
 
     def check_exit(self):
         """Check if current room is an exit room, return True to break loop in main if so"""
@@ -44,16 +43,16 @@ class Orchestrator:
                 # Player combat turn
                 self.combat_manager.run_turn(self.PC, self.current_node.mob, True)
                 if self.current_node.mob.hp <= 0:
-                    self.current_node.mob.hp = 0
 
                     # reward the player xp,hp and sp for killing the mob
                     reward_xp = 25 * self.dungeon_level
                     reward_hp_sp = 10 * self.dungeon_level
-                    # cap the reward at max hp and sp
-                    self.PC.hp = min(self.PC.hp + reward_hp_sp, self.PC.max_hp)
-                    self.PC.sp = min(self.PC.sp + reward_hp_sp, self.PC.max_sp)
+
+                    self.PC.update_HP(reward_hp_sp)
+                    self.PC.update_SP(reward_hp_sp)
 
                     Tools.clear_terminal()
+
                     print(f"\nYou killed the {Tools.YELLOW}{self.current_node.mob.name}{Tools.RESET}!")
                     print(
                         f"{Tools.CYAN}{self.PC.name}{Tools.RESET} gained {Tools.GREEN}+{reward_hp_sp}{Tools.RESET} HP & SP")
@@ -67,9 +66,7 @@ class Orchestrator:
                 # NPC combat turn
                 self.combat_manager.run_turn(self.PC, self.current_node.mob, False)
                 if self.PC.hp <= 0:
-                    self.PC.hp = 0
                     break
-
 
     def run(self):
         """Method to run the main game, uses methods above"""

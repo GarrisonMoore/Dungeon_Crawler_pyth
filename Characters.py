@@ -23,11 +23,27 @@ class Character:
         self.name = name
         self.hp = hp
         self.sp = sp
+        self.max_hp = hp
+        self.max_sp = sp
         self.hyperarmour = 0
 
     # formatting character data for the terminal
     def __str__(self):
         return f"{self.name, self.hp, self.sp}"
+
+    def take_damage(self, incoming_dmg):
+        actual_damage = max(0, incoming_dmg - self.hyperarmour)
+        self.hp = max(0, self.hp - actual_damage)
+
+    def update_HP(self, amount):
+        self.hp = min(self.hp + amount, self.max_hp)
+
+    def update_SP(self, amount):
+        self.sp = min(self.sp + amount, self.max_sp)
+
+    def full_restore(self):
+        self.hp = self.max_hp
+        self.sp = self.max_sp
 
 class Player(Character):
     """Player class to initialize player data"""
@@ -35,12 +51,9 @@ class Player(Character):
         user_name = input("What is your warriors name? ")
         self.hp = hp
         self.sp = sp
-        self.max_hp = hp
-        self.max_sp = sp
         self.xp = xp
         self.level = 1
         self.xp_to_next_level = 100
-
         self.is_Player = True
 
         super().__init__(user_name,hp,sp)
@@ -60,7 +73,6 @@ class Player(Character):
             else:
                 print(f"\n{choice(blocked_strings)}\n")
                 continue
-
         return  current_node
 
     def gain_xp(self, amount):
@@ -88,8 +100,6 @@ class Mob(Character):
         self.name = name
         self.hp = hp
         self.sp = sp
-        self.max_hp = hp
-        self.max_sp = sp
 
         super().__init__(name,hp,sp)
 
@@ -100,8 +110,8 @@ def call_mob(current_level):
     stats = mob_list[mob_name]
 
     # scale the mob's stats based on the current level
-    scaled_hp = stats["hp"] * (current_level)
-    scaled_sp = stats["sp"] * (current_level)
+    scaled_hp = stats["hp"] * current_level
+    scaled_sp = stats["sp"] * current_level
 
     # return a Mob object with the scaled stats
     return Mob(name = mob_name, hp = scaled_hp, sp = scaled_sp)

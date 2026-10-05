@@ -86,8 +86,6 @@ class CombatManager:
         else:
             name = Tools.YELLOW + name + Tools.RESET
 
-
-
         # if elif block handles all possible inputs
         for action in inputs:
 
@@ -163,31 +161,23 @@ class CombatManager:
             hp_change, sp_change, dmg_in, dmg_out = self.resolve_turn(name, choice, True, player.sp,player.level)
 
             # calculate actual damage dealt based on hyperarmour
-            actual_damage = max(0, dmg_out - current_enemy.hyperarmour)
-            current_enemy.hp -= actual_damage
+            current_enemy.take_damage(dmg_out)
             player.hyperarmour = dmg_in
 
             # calculate final HP and SP change after turn
-            player.hp = min(player.hp + hp_change, player.max_hp)
-            player.sp = min(player.sp + sp_change, player.max_sp)
+            player.update_HP(hp_change)
+            player.update_SP(sp_change)
 
-        # calculate NPC combat turn
+        # if NPC turn, resolve turn based on NPC input
         else:
             name = current_enemy.name
             choice = self.npc_input(current_enemy)
             hp_change, sp_change, dmg_in, dmg_out = self.resolve_turn(name, choice, False, current_enemy.sp,player.level)
 
             # calculate actual damage dealt based on hyperarmour
-            actual_damage = max(0, dmg_out - player.hyperarmour)
-            player.hp -= actual_damage
+            player.take_damage(dmg_out)
             current_enemy.hyperarmour = dmg_in
 
             # calculate final HP and SP change after turn
-            current_enemy.hp = min(current_enemy.hp + hp_change, current_enemy.max_hp)
-            current_enemy.sp = min(current_enemy.sp + sp_change, current_enemy.max_sp)
-
-        # keep HP from going below 0
-        if current_enemy.hp < 0:
-            current_enemy.hp = 0
-        if player.hp < 0:
-            player.hp = 0
+            current_enemy.update_HP(hp_change)
+            current_enemy.update_SP(sp_change)
