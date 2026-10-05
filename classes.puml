@@ -6,7 +6,14 @@ class "Character" as Dungeon_Crawler.Characters.Character {
   name
   sp
 }
-class "Game" as Dungeon_Crawler.orchestrator.Game {
+class "CombatManager" as Dungeon_Crawler.CombatManager.CombatManager {
+  run_turn()
+  resolve_turn()
+  show_stats()
+  player_input()
+  npc_input()
+}
+class "Orchestrator" as Dungeon_Crawler.Orchestrator.Orchestrator {
   PC
   current_node : NoneType
   dungeon_level : int
@@ -45,4 +52,14 @@ class "Room" as Dungeon_Crawler.dungeon.Room {
 }
 Dungeon_Crawler.Characters.Mob --|> Dungeon_Crawler.Characters.Character
 Dungeon_Crawler.Characters.Player --|> Dungeon_Crawler.Characters.Character
+
+Dungeon_Crawler.Orchestrator.Orchestrator *-- Dungeon_Crawler.CombatManager.CombatManager
+Dungeon_Crawler.Orchestrator.Orchestrator *-- Dungeon_Crawler.Characters.Player
+Dungeon_Crawler.Orchestrator.Orchestrator *-- Dungeon_Crawler.dungeon.Room
+Dungeon_Crawler.dungeon.Room *-- Dungeon_Crawler.Characters.Mob
+
+Dungeon_Crawler.CombatManager.CombatManager ..> Dungeon_Crawler.Characters.Character
+Dungeon_Crawler.CombatManager.CombatManager ..> Dungeon_Crawler.Characters.Mob
+
+
 @enduml
