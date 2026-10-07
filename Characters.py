@@ -3,7 +3,8 @@ import Tools
 
 # Using a dictionary to store different characters and their stats
 mob_list = {
-    "Goblin": {"hp":10, "sp":10},
+    "Skeleton": {"hp":10, "sp":10},
+    "Goblin": {"hp":15, "sp":15},
     "Orc": {"hp":20, "sp":20},
     "Troll": {"hp":40, "sp":40}
 }
