@@ -1,8 +1,9 @@
+import sys
+
 import Characters
 import CombatManager
 import Dungeon
 import Tools
-
 
 class Orchestrator:
     """
@@ -89,10 +90,27 @@ class Orchestrator:
         while True:
             # check if player character is alive before doing anything
             if self.PC.hp <= 0:
+
+                # Print death screen
                 Tools.clear_terminal()
-                print(
-                    f"{Tools.CYAN}{self.PC.name}{Tools.RESET} has been slain by the {Tools.YELLOW}{self.current_node.mob.name}{Tools.RESET}!")
-                break
+                print(f"{Tools.CYAN}{self.PC.name}{Tools.RESET} has been slain by the {Tools.YELLOW}{self.current_node.mob.name}{Tools.RESET}!")
+
+                # Print stats
+                print(f"{Tools.CYAN}{self.PC.name}{Tools.RESET} made it to: "
+                      f"\nDungeon Level {Tools.GREEN}{self.dungeon_level}{Tools.RESET}"
+                      f"\nPlayer Level {Tools.GREEN}{self.PC.level}{Tools.RESET}")
+
+                # Input validation loop, ask to play again
+                while True:
+                    play_again = input("\nPlay again? (y/n) : ")
+
+                    if play_again.lower() == "n":
+                        sys.exit()
+                    elif play_again.lower() == "y":
+                        self.__init__()
+                        break
+                    else:
+                        print("Huh?")
 
             # generate the dungeon and call visualize_map to display it
             start_node = Dungeon.generate_dungeon(self.dungeon_level)
