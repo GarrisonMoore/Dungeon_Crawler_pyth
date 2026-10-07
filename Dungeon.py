@@ -8,7 +8,9 @@ room_list = ["Sewer", "Grotto", "Cave", "Sludge pit", "Bonfire", "Corridor","Cry
              "Abyss","Tomb","Catacomb","Gutter"]
 
 class Room:
-    """A room is a node in the map"""
+    """
+    A room is a node in the map
+    """
     def __init__(self,name, current_level):
         self.name = name
         # paths are edges
@@ -35,11 +37,13 @@ class Room:
         return self.name
 
 def generate_dungeon(current_level):
-    """Procedurally generates a dungeon based on the current level.
+    """
+    Procedurally generates a dungeon based on the current level.
 
     Uses a 'tree' structure:
         * The trunk is the path from the entrance to the exit
-        * The branches are decoy rooms that connect to the trunk"""
+        * The branches are decoy rooms that connect to the trunk
+    """
 
     # Math to scale the dungeon size based on the current level
     trunk_length = current_level * 2
@@ -108,9 +112,11 @@ def generate_dungeon(current_level):
     return start_room
 
 def visualize_map(room, indent=""):
-    """DEBUG METHOD: Visualizes the dungeon map
+    """
+    DEBUG METHOD: Visualizes the dungeon map
 
-    * GEMINI WROTE THIS METHOD. I needed something to help visualize the data structure."""
+    * GEMINI WROTE THIS METHOD. I needed something to help visualize the data structure.
+    """
 
     # if the room is on the main path, wrap its name in the green color code
     display_name = f"{Tools.GREEN}{room.name}{Tools.RESET}" if room.is_trunk else room.name

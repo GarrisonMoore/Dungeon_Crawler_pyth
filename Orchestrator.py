@@ -5,7 +5,10 @@ import Tools
 
 
 class Orchestrator:
-    """Game class represents the orchestrator of the game (God basically)"""
+    """
+    Game class represents the orchestrator of the game (God basically)
+    """
+
     def __init__(self):
         self.name = " "
         self.dungeon_level = 1
@@ -15,14 +18,20 @@ class Orchestrator:
         self.combat_manager = CombatManager.CombatManager()
 
     def check_bonfire(self):
-        """Check if current room is a bonfire, heal and charge if so"""
+        """
+        Check if current room is a bonfire, heal and charge if so
+        """
+
         # if current room is a bonfire, rest safely and heal HP and SP
         if self.current_node.is_bonfire:
             print(f"\n{Tools.GREEN}You rest safely. HP and SP fully restored.{Tools.RESET}")
             self.PC.full_restore()
 
     def check_exit(self):
-        """Check if current room is an exit room, return True to break loop in main if so"""
+        """
+        Check if current room is an exit room, return True to break loop in main if so
+        """
+
         # check if room is an exit, break loop if it is / increment level and reward player xp
         if self.current_node.is_exit:
             print("\nYou have reached the exit!\n")
@@ -34,7 +43,10 @@ class Orchestrator:
         return False
 
     def check_mob(self):
-        """Check if the current room has a mob, run combat if so"""
+        """
+        Check if the current room has a mob, run combat if so
+        """
+
         # if current room has a mob, spawn it and run combat
         if self.current_node.mob:
             print(f"\nA {Tools.YELLOW}{self.current_node.mob.name}{Tools.RESET} has appeared!")
@@ -69,7 +81,9 @@ class Orchestrator:
                     break
 
     def run(self):
-        """Method to run the main game, uses methods above"""
+        """
+        Method to run the main game, uses methods above
+        """
 
         # Main game loop
         while True:

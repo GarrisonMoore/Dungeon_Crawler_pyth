@@ -1,4 +1,3 @@
-from argparse import BooleanOptionalAction
 from random import choice
 import Tools
 
@@ -18,7 +17,9 @@ blocked_strings = ["You can't go that way!",
                    "You bump your forehead against a wall. Smart move."]
 
 class Character:
-    """Universal Character class to initialize character data"""
+    """
+    Universal Character class to initialize character data
+    """
     def __init__(self,name,hp,sp):
         self.name = name
         self.hp = hp
@@ -58,7 +59,9 @@ class Character:
         self.sp = self.max_sp
 
 class Player(Character):
-    """Player class to initialize player data"""
+    """
+    Player class to initialize player data
+    """
     def __init__(self,hp,sp,xp):
         user_name = input("What is your warriors name? ")
         self.hp = hp
@@ -74,7 +77,9 @@ class Player(Character):
         self.xp = 0
 
     def move(self, current_node):
-        """Method to take user input and turn it into player traversal action"""
+        """
+        Method to take user input and turn it into player traversal action
+        """
         while True:
             player_action = input("Where to? ")
             # if the action is a valid door, move to the next room
@@ -88,7 +93,9 @@ class Player(Character):
         return  current_node
 
     def gain_xp(self, amount):
-        """Method to add xp to the player and level up if necessary"""
+        """
+        Method to add xp to the player and level up if necessary
+        """
         self.xp += amount
         print(f"{Tools.CYAN}{self.name}{Tools.RESET} gained {Tools.GREEN}+{amount}{Tools.RESET} XP!")
 
@@ -107,7 +114,9 @@ class Player(Character):
             print(f"Max HP and SP increased by {Tools.GREEN}20{Tools.RESET}!")
 
 class Mob(Character):
-    """Mob class to initialize mob data"""
+    """
+    Mob class to initialize mob data
+    """
     def __init__(self,name,hp,sp):
         self.name = name
         self.hp = hp
@@ -116,7 +125,9 @@ class Mob(Character):
         super().__init__(name,hp,sp)
 
 def call_mob(current_level):
-    """Randomly selects a mob from the mob_list dictionary and scales its stats based on the current level."""
+    """
+    Randomly selects a mob from the mob_list dictionary and scales its stats based on the current level.
+    """
     mob_name = choice(list(mob_list.keys()))
     # get mob stats from the mob_list dictionary
     stats = mob_list[mob_name]

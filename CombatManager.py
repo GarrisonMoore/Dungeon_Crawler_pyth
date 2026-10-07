@@ -2,15 +2,22 @@ from random import randint
 from random import choice
 import Tools
 
+# List to store combat input options as strings
 inputs = ["a", "d", "r", "h"]
 
+# List to store variations of the word "attacks" for flavor
 attack_var = ["punches", "kicks", "drop kicks", "body slams", "guillotines",
              "suplexes", "chokeslams", "powerbombs", "karate chops", "tickles", "bad breath hits"]
 
+# List to store variations of the word "defends" for flavor
 block_var = ["blocks", "deflects", "parries", "dodges", "evades", "brushes off", "absorbs"]
 
 class CombatManager:
+    """
+    This is a helper class that orchestrates combat.
 
+    Runs NPC's or Players inputs through the resolve turn method to calculate output
+    """
     @staticmethod
     def show_stats(player,enemy):
         """Displays current combat stats for both entities"""
@@ -21,9 +28,11 @@ class CombatManager:
 
     @staticmethod
     def player_input():
-        """Helper method to get player input
+        """
+        Helper method to get player input
 
-        * 3 inputs max per turn. Can do any combination of (a/d/r/h)"""
+        * 3 inputs max per turn. Can do any combination of (a/d/r/h)
+        """
         inputs = input("What do you want to do? (a/d/r/h) [Max 3 actions]").lower()
 
         # slice the string to limit player input to 3 actions
@@ -34,7 +43,9 @@ class CombatManager:
 
     @staticmethod
     def npc_input(enemy):
-        """Helper method to get npc input"""
+        """
+        Helper method to get npc input
+        """
         npc_inputs = ""
 
         # get enemy sp
@@ -70,7 +81,9 @@ class CombatManager:
 
     @staticmethod
     def resolve_turn(name, inputs, is_player, current_sp,player_level):
-        """Method to resolve a turn based on any of the inputs. Used for PC and NPC's."""
+        """
+        Method to resolve a turn based on any of the inputs. Used for PC and NPC's.
+        """
         # a = attack
         # d = defend
         # r = recharge sp
@@ -150,7 +163,9 @@ class CombatManager:
         return hp_change, sp_change, dmg_in, dmg_out
 
     def run_turn(self, player,current_enemy,is_player):
-        """Main method to run a combat turn. Handles both PC and NPC's"""
+        """
+        Main method to run a combat turn. Handles both PC and NPC's
+        """
         # show stats before turn
         self.show_stats(player,current_enemy)
 

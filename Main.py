@@ -13,7 +13,8 @@ Combat uses a 3 input per turn, stamina bound system. Creates a heavy survival-l
         * 'a' = Attack (deal heavy damage, costs SP)
         * 'd' = Defend (build hyper-armour for 1 turn, costs SP)
         * 'r' = Recharge SP (Recharge stamina points)
-        * 'h' = Heal (recharge health, costs SP)"""
+        * 'h' = Heal (recharge health, costs SP)
+"""
 
 from Orchestrator import Orchestrator
 import Tools
