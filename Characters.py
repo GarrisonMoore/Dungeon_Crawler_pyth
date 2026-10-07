@@ -85,6 +85,7 @@ class Player(Character):
             # if the action is a valid door, move to the next room
             if player_action in current_node.paths and current_node.paths[player_action] is not None:
                 current_node = current_node.paths[player_action]
+                Tools.clear_terminal()
                 print(f"\n{Tools.CYAN}{self.name}{Tools.RESET} enters the {Tools.MAGENTA}{current_node}{Tools.RESET}.")
                 break
             else:
